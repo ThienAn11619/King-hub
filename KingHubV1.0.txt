@@ -51,10 +51,10 @@ local v2 = {
     }
 };
 local v3 = {
-    [1] = "human",
-    [2] = "fish",
-    [3] = "ghoul",
-    [4] = "rabbit"
+    [1] = "Watting...",
+    [2] = "Watting..",
+    [3] = "Watting.",
+    [4] = "Watting..."
 };
 function TweenObject(v178, v179, v180)
     game.TweenService:Create(v178, TweenInfo.new(v179, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), v180):Play();
@@ -96,7 +96,7 @@ local v7 = CreateObject("ImageLabel", {
     Name = "UserImage",
     Parent = v6,
     BackgroundTransparency = 1,
-    Image = "rbxassetid://9180622670",
+    Image = "",
     Position = UDim2.new(0, 15, 0, 10),
     Size = UDim2.new(0, 50, 0, 50)
 });
@@ -316,7 +316,7 @@ local v15 = v14:CreateWindow({
     Title = "King Hub v1.0",
     SubTitle = "First Edition Of King Hub🐧",
     TabWidth = 160,
-    Theme = "Light",
+    Theme = "Dark",
     Acrylic = false,
     Size = UDim2.fromOffset(500, 320),
     MinimizeKey = Enum.KeyCode.End
