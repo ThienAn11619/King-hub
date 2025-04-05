@@ -1,0 +1,46 @@
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local Workspace = game:GetService("Workspace")
+
+-- Function to teleport to a position
+local function teleportTo(position)
+    if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(position)
+    end
+end
+
+-- Function to find and collect chests
+local function collectChests()
+    local chests = {}
+    -- Hypothetically find all chests in Workspace (not how Blox Fruits structures it)
+    for _, object in pairs(Workspace:GetChildren()) do
+        if object.Name:lower():find("chest") then -- Simplified check for "chest" in name
+            table.insert(chests, object)
+        end
+    end
+
+    if #chests == 0 then
+        print("No chests found!/Không có rương!")
+        return
+    end
+
+    -- Loop through chests and "collect" them
+    for _, chest in pairs(chests) do
+        local distance = (LocalPlayer.Character.HumanoidRootPart.Position - chest.Position).Magnitude
+        if distance < 50 then -- Only target chests within 50 studs
+            teleportTo(chest.Position + Vector3.new(0, 5, 0)) -- Hover above chest
+            print("Collecting " .. chest.Name)
+            wait(0.5) -- Simulate collection time
+        end
+    end
+end
+
+-- Main auto farm loop
+while true do
+    wait(1) -- Delay to avoid overloading
+    if LocalPlayer.Character and LocalPlayer.Character.Humanoid then
+        collectChests()
+    else
+        print("Character not loaded yet!")
+    end
+end
