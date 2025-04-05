@@ -1,0 +1,47 @@
+local Library = loadstring(game:HttpGet("https://example.com/library.lua"))()
+local Window = Library:CreateWindow("Auto Farm Chest")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local Workspace = game:GetService("Workspace")
+local farming = false
+local function teleportTo(position)
+    if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(position)
+    end
+end
+local function findChests()
+    local chests = {}
+    for _, obj in pairs(Workspace:GetDescendants()) do
+        if obj.Name:lower():find("chest") and obj:IsA("BasePart") then -- Look for "chest" in name
+            table.insert(chests, obj)
+        end
+    end
+    return chests
+end
+local function autoFarmChests()
+    while farming do
+        wait(0.5)
+        local chests = findChests()
+        if #chests > 0 then
+            for _, chest in pairs(chests) do
+                if chest and (LocalPlayer.Character.HumanoidRootPart.Position - chest.Position).Magnitude < 100 then
+                    teleportTo(chest.Position + Vector3.new(0, 5, 0)) -- Move above chest
+                    print("Collecting chest: " .. chest.Name)
+                    wait(0.3) -- Simulate collection delay
+                end
+            end
+        else
+            print("No chests found!")
+        end
+    end
+end
+Window:Button("Enable Auto Farm Chest", function()
+    farming = true
+    spawn(autoFarmChests) -- Run in a separate thread
+    print("Auto Farm Chest enabled!")
+end)
+
+Window:Button("Disable Auto Farm Chest", function()
+    farming = false
+    print("Auto Farm Chest disabled!")
+end)
