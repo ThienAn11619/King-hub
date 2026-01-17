@@ -14,14 +14,14 @@ loadstring(game:HttpGet(("https://raw.githubusercontent.com/daucobonhi/Ui-Redz-V
         Notifi = {
         Notifications = true,
         CorrectKey = "Đang chạy menu...",
-       Incorrectkey = "Key sai rồi má!",
-       CopyKeyLink = "Đã copy rồi cu"
+       Incorrectkey = "Key sai",
+       CopyKeyLink = "Đã copy"
       }
     }
   })
 
        MinimizeButton({
-       Image = "http://www.roblox.com/asset/?id=70837236936358",
+       Image = "https://www.roblox.com/asset/?id=70837236936358",
        Size = {60, 60},
        Color = Color3.fromRGB(10, 10, 10),
        Corner = true,
